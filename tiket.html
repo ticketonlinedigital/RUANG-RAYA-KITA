@@ -7,176 +7,226 @@
 <title>RUANG RAYA - KARAWANG</title>
 
 <style>
+
 *{margin:0;padding:0;box-sizing:border-box}
+
+:root{
+  --loket-blue:#0d47a1;
+  --loket-border:#e5e7eb;
+  --loket-bg:#f3f4f6;
+  --loket-text:#1f2937;
+}
 
 body{
   font-family:Arial,sans-serif;
-  background:#f4f6fb;
-  color:#1f2937;
-  padding-bottom:100px
+  background:var(--loket-bg);
+  color:var(--loket-text);
+  padding-bottom:110px;
 }
 
 .header{
   background:#fff;
-  padding:14px;
+  padding:14px 18px;
   position:sticky;
   top:0;
-  z-index:10;
-  box-shadow:0 2px 10px rgba(0,0,0,.05)
+  z-index:100;
+  border-bottom:1px solid var(--loket-border);
 }
 
 .wrap{
-  max-width:960px;
-  margin:auto
+  max-width:760px;
+  margin:auto;
 }
 
 .logo{
-  height:40px
+  height:34px;
 }
 
 .stepper{
-  background:#fff;
-  padding:18px
+  display:none;
 }
 
-.steps{
-  display:flex;
-  justify-content:center;
-  align-items:center
-}
-
-.c{
-  width:36px;
-  height:36px;
-  border-radius:50%;
-  border:2px solid #d1d5db;
-  display:flex;
-  align-items:center;
-  justify-content:center
-}
-
-.c.active{
-  border-color:#0d6efd;
-  color:#0d6efd
-}
-
-.l{
-  width:50px;
-  height:2px;
-  background:#d1d5db
+.hero{
+  max-width:760px;
+  margin:18px auto 0;
+  padding:0 14px;
 }
 
 .hero img{
   width:100%;
-  display:block
+  display:block;
+  border-radius:14px 14px 0 0;
 }
 
 .event{
+  max-width:732px;
+  margin:0 auto;
   background:#fff;
-  padding:22px;
+  padding:16px;
   text-align:center;
-  font-size:28px;
-  font-weight:800;
-  color:#143d7a
+  font-size:20px;
+  font-weight:700;
+  color:#23395d;
+  border-left:1px solid var(--loket-border);
+  border-right:1px solid var(--loket-border);
+  border-bottom:1px solid var(--loket-border);
 }
 
 .section{
-  max-width:960px;
-  margin:20px auto;
-  padding:0 15px
+  max-width:760px;
+  margin:0 auto;
+  padding:14px;
 }
 
 .new-title{
-  background:#dbeafe;
-  color:#1d4ed8;
-  padding:16px;
-  border-radius:16px;
-  text-align:center;
-  font-weight:800;
-  margin-bottom:20px
+  display:none;
 }
 
 .card{
+  position:relative;
   background:#fff;
-  border-radius:20px;
-  box-shadow:0 10px 30px rgba(0,0,0,.08);
-  padding:24px;
-  margin-bottom:20px
+  border:1px solid var(--loket-border);
+  border-radius:16px;
+  box-shadow:none;
+  padding:20px;
+  margin-bottom:16px;
+  overflow:hidden;
+}
+
+.card::before,
+.card::after{
+  content:"";
+  position:absolute;
+  width:28px;
+  height:28px;
+  background:var(--loket-bg);
+  border:1px solid var(--loket-border);
+  border-radius:50%;
+  top:56%;
+}
+
+.card::before{
+  left:-15px;
+}
+
+.card::after{
+  right:-15px;
+}
+
+.card h2{
+  font-size:18px;
+  font-weight:500;
+  margin-bottom:14px;
+}
+
+.card p{
+  margin-bottom:12px;
+  color:#6b7280;
+  font-size:14px;
+}
+
+.card ul{
+  margin:0 0 18px 18px !important;
+  line-height:1.8;
+  color:#374151;
+  font-size:14px;
+  padding-bottom:16px;
+  border-bottom:1px dashed #d1d5db;
 }
 
 .badge{
-  display:inline-block;
-  background:#dcfce7;
-  color:#166534;
-  padding:8px 14px;
+  display:inline-flex;
+  align-items:center;
+  background:#ecfdf5;
+  color:#15803d;
+  padding:6px 12px;
   border-radius:999px;
-  font-weight:700
+  font-size:12px;
+  font-weight:700;
 }
 
 .meta{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  margin:12px 0 18px;
+  margin:8px 0 12px;
   gap:10px;
-  flex-wrap:wrap
+  flex-wrap:wrap;
+  font-size:13px;
+  color:#2563eb;
 }
 
 .price{
-  font-size:36px;
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:8px;
+  font-size:22px;
   font-weight:800;
-  margin:15px 0
+  color:#111827;
+  margin:0;
 }
 
 .old-price{
   text-decoration:line-through;
-  color:#6b7280;
-  font-size:20px;
-  margin-left:10px
+  color:#9ca3af;
+  font-size:14px;
+  margin-left:0;
 }
 
 .discount{
   display:inline-block;
-  background:#fee2e2;
-  color:#b91c1c;
-  padding:4px 10px;
-  border-radius:999px;
+  background:#ef4444;
+  color:#fff;
+  padding:4px 8px;
+  border-radius:6px;
   font-size:12px;
   font-weight:700;
-  margin-left:10px
+  margin-left:0;
 }
 
 .qty{
+  margin-top:18px;
   display:flex;
-  gap:10px;
-  align-items:center
+  justify-content:flex-end;
+  gap:8px;
+  align-items:center;
 }
 
 .qty button{
-  width:42px;
-  height:42px;
+  width:38px;
+  height:38px;
   border:none;
-  border-radius:12px;
-  background:#0f4c81;
+  border-radius:10px;
+  background:var(--loket-blue);
   color:#fff;
   font-size:22px;
-  cursor:pointer
+  cursor:pointer;
 }
 
 .qty input{
-  width:70px;
-  height:42px;
+  width:58px;
+  height:38px;
   text-align:center;
   border:1px solid #d1d5db;
-  border-radius:12px;
-  font-size:18px
+  border-radius:10px;
+  font-size:16px;
+  background:#fff;
 }
 
 .footer{
   background:#fff;
-  margin-top:30px;
-  padding:30px;
-  text-align:center
+  margin:20px auto 0;
+  max-width:760px;
+  padding:32px 20px 110px;
+  text-align:center;
+  border-top:1px solid var(--loket-border);
+  color:#6b7280;
+}
+
+.footer .logo{
+  height:44px;
+  margin-bottom:10px;
 }
 
 .sticky{
@@ -188,34 +238,36 @@ body{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  padding:14px 18px;
-  box-shadow:0 -8px 20px rgba(0,0,0,.1)
+  padding:16px 18px calc(16px + env(safe-area-inset-bottom));
+  border-top:1px solid var(--loket-border);
+  box-shadow:0 -4px 18px rgba(0,0,0,.08);
+}
+
+#jml{
+  color:#6b7280;
+  font-size:14px;
+  margin-bottom:4px;
 }
 
 .btn{
-  background:#0d6efd;
+  background:#0b57d0;
   color:#fff;
   border:none;
-  border-radius:16px;
-  padding:16px 24px;
+  border-radius:14px;
+  padding:16px 28px;
   font-weight:700;
-  cursor:pointer
+  cursor:pointer;
+  min-width:180px;
 }
 
 @media(max-width:700px){
-
-  .event{
-    font-size:22px
-  }
-
-  .sticky{
-    gap:15px
-  }
-
-  .price{
-    font-size:28px
-  }
+  .hero,.section{padding-left:12px;padding-right:12px;}
+  .event{font-size:18px;}
+  .sticky{gap:14px;}
+  .btn{min-width:auto;flex:1;}
+  #total{font-size:18px !important;}
 }
+
 </style>
 </head>
 
@@ -248,14 +300,14 @@ body{
 <div class="section">
 
   <div class="new-title">
-    🎟️ TIKET TAMBAHAN RESMI TELAH DIBUKA — PILIH KATEGORI TIKET ANDA
+    🎟️ TIKET REGULER RESMI TELAH DIBUKA — PILIH KATEGORI TIKET ANDA
   </div>
 
   <!-- VIP FESTIVAL -->
 
   <div class="card">
 
-    <h2>EARLY BIRD - VIP FESTIVAL</h2>
+    <h2>REGULER - VIP FESTIVAL</h2>
 
     <p><b>KATEGORI UTAMA</b></p>
 
@@ -284,9 +336,9 @@ body{
 
   <div class="card">
 
-    <h2>EARLY BIRD - Early Entry</h2>
+    <h2>REGULER - Early Entry</h2>
 
-    <p><b>KATEGORI TIKET TAMBAHAN</b></p>
+    <p><b>LAST TICKET SALE</b></p>
 
     <div class="meta">
       <span class="badge">TERSEDIA</span>
@@ -317,9 +369,9 @@ body{
 
   <div class="card">
 
-    <h2>EARLY BIRD - Festival</h2>
+    <h2>REGULER - Festival</h2>
 
-    <p><b>KATEGORI TIKET TAMBAHAN</b></p>
+    <p><b>LAST TICKET</b></p>
 
     <div class="meta">
       <span class="badge">TERSEDIA</span>
