@@ -79,9 +79,9 @@ body{background:linear-gradient(135deg,#081225,#101b35);color:#fff;padding:20px}
 emailjs.init("qwh-PQ-0-G6lBjI4C");
 
 const nama=localStorage.getItem('nama')||'-';
-const jenis=localStorage.getItem('jenisTiket')||'-';
-const jumlah=localStorage.getItem('jumlahTiket')||'0';
-const total=localStorage.getItem('totalPembayaran')||'0';
+const jenis=localStorage.getItem('jenisTiket')||localStorage.getItem('ticket_name')||'-';
+const jumlah=localStorage.getItem('jumlahTiket')||localStorage.getItem('ticket_qty')||'0';
+const total=localStorage.getItem('totalPembayaran')||((localStorage.getItem('ticket_qty')||0)*(localStorage.getItem('ticket_price')||0));
 
 document.getElementById('nama').innerText=nama;
 document.getElementById('jenis').innerText=jenis;
