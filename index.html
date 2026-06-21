@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>RUANG RAYA - KARAWANG - FINAL</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+body{background:#f4f4f4;color:#1d2d5a;max-width:768px;margin:auto}
+.header{background:#fff;padding:18px}
+.logo{font-size:26px;font-weight:700}
+.search{margin-top:15px;background:#f1f2f6;border-radius:16px;padding:18px;color:#888}
+.banner img{width:100%;display:block}
+.card{background:#fff;padding:22px}
+h1{font-size:28px;margin-bottom:20px}
+.info{display:flex;gap:14px;margin:14px 0;color:#222}
+.info i{color:#1d3ea8;width:24px}
+.share{color:#1455d9;font-weight:bold;margin:20px 0}
+.org{border-top:1px dashed #ddd;border-bottom:1px dashed #ddd;padding:22px 0;margin:20px 0}
+.tabs{display:flex;background:#fff;border-top:1px solid #ddd}
+.tabs div{padding:16px;font-weight:600;color:#888}
+.tabs .active{color:#1455d9;border-bottom:3px solid #1455d9}
+.content{background:#fff;padding:24px;line-height:1.7;font-size:18px}
+.ticketbox{background:#fff;padding:24px}
+.ticket{background:#fff;border-radius:18px;box-shadow:0 2px 12px rgba(0,0,0,.08);padding:20px}
+.row{display:flex;justify-content:space-between;margin:18px 0}
+.price{font-size:18px;color:#111}
+.old{text-decoration:line-through;color:#999;margin-left:6px}
+.bottom{position:sticky;bottom:0;background:#fff;padding:18px;border-top:1px solid #ddd}
+.btn{display:block;text-align:center;background:#0f4bd7;color:#fff;text-decoration:none;padding:20px;border-radius:16px;font-size:20px;font-weight:700}
+
+.tabs{position:sticky;top:0;z-index:10}
+.tabs div{cursor:pointer;flex:1;text-align:center}
+.tab-section{display:none}
+.tab-section.active{display:block}
+.ticket-item{background:#fff;border-radius:20px;margin:14px 0;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.08)}
+.ticket-cut{border-top:2px dashed #ddd;position:relative}
+.ticket-cut:before,.ticket-cut:after{content:'';position:absolute;top:-12px;width:24px;height:24px;border-radius:50%;background:#f4f4f4}
+.ticket-cut:before{left:-12px}.ticket-cut:after{right:-12px}
+
+</style>
+
+<style>
+.ticket-pro{background:#fff;border-radius:22px;overflow:hidden;box-shadow:0 4px 14px rgba(0,0,0,.08);margin:14px 0}
+.ticket-head{padding:18px;font-weight:700}
+.ticket-divider{border-top:2px dashed #ddd;position:relative}
+.ticket-divider:before,.ticket-divider:after{content:'';position:absolute;top:-12px;width:24px;height:24px;background:#f4f4f4;border-radius:50%}
+.ticket-divider:before{left:-12px}.ticket-divider:after{right:-12px}
+.ticket-body{padding:18px}
+.tabs div.active{background:#eef4ff}
+</style>
+
+</head>
+<body>
+
+<div class="header">
+<div class="logo">LOKÉT 13th</div>
+<div class="search">Cari event Jakarta Fair Kemayoran 2026</div>
+</div>
+
+<div class="banner">
+<img src="banner.png" alt="Ruang Raya">
+</div>
+
+<div class="card">
+<h1>RUANG RAYA - KARAWANG</h1>
+
+<div class="info"><i class="fa-solid fa-location-dot"></i><span>KAWASAN 3 BISNIS, KARAWANG, KARAWANG</span></div>
+<div class="info"><i class="fa-regular fa-calendar"></i><span>12 Sep 2026, 14:00 - 23:00 WIB</span></div>
+<div class="info"><i class="fa-solid fa-shapes"></i><span>Konser • Musik • Ballad / Romantis</span></div>
+
+<div class="share"><i class="fa-solid fa-share-nodes"></i> Bagikan Event</div>
+
+<div class="org">
+<div style="color:#888">Diselenggarakan oleh</div>
+<div style="font-size:20px;font-weight:bold;margin-top:10px">LIMA RUANG</div>
+</div>
+</div>
+
+<div class="tabs">
+<div>Deskripsi</div>
+<div class="active">Tiket</div>
+<div>Syarat dan Ketentuan</div>
+</div>
+
+<div class="ticketbox">
+<h2 style="margin-bottom:18px">Tiket</h2>
+
+<div class="ticket">
+<h3>ONLINE SALES</h3>
+<p style="color:#888">3 kategori tiket - Harga mulai dari Rp175.000</p>
+
+<div class="row">
+<div>
+<div>EARLY BIRD - Early Entry</div>
+<small>Penjualan berakhir 21 Jun 2026 23.59 WIB</small>
+</div>
+<div class="price">Rp175.000 <span class="old">Rp300.000</span></div>
+</div>
+
+<div class="row">
+<div>
+<div>EARLY BIRD - Festival</div>
+<small>Penjualan berakhir 21 Jun 2026 23.59 WIB</small>
+</div>
+<div class="price">Rp230.000 <span class="old">Rp350.000</span></div>
+</div>
+
+<div class="row">
+<div>
+<div>EARLY BIRD - VIP Festival</div>
+<small>Sold Out</small>
+</div>
+<div class="price">Rp290.000 <span class="old">Rp400.000</span></div>
+</div>
+</div>
+
+<div class="content">
+<p>Ruang Raya adalah festival yang mempertemukan musik, komunitas, kuliner, dan kreativitas lokal dalam satu perayaan. Lebih dari sekadar konser, Ruang Raya menjadi ruang bagi semua orang untuk berkumpul, berekspresi, dan menciptakan momen yang tak terlupakan.</p>
+<p><b>"Menyalakan Ruang, Merayakan Kota."</b></p>
+
+<h3 style="margin-top:24px">Syarat dan Ketentuan</h3>
+<ol>
+<li>Tiket yang sah adalah yang dibeli melalui channel resmi yang ditunjuk oleh penyelenggara.</li>
+<li>Satu tiket berlaku untuk satu orang dan satu kali masuk area venue.</li>
+<li>Pembeli tiket minimal berusia 12 tahun. Penonton di bawah 12 tahun tidak diperbolehkan masuk.</li>
+<li>Ibu hamil tidak disarankan memasuki area venue RUANG RAYA - KARAWANG.</li>
+<li>Wajib membawa kartu identitas asli dan e-voucher.</li>
+<li>Maksimum pembelian 4 tiket dalam 1 transaksi.</li>
+<li>Tiket tidak dapat dikembalikan (non-refundable).</li>
+<li>Dilarang menjual kembali tiket yang sudah dibeli.</li>
+<li>Penyelenggara berhak menolak tiket tidak valid dan menindak pelanggaran.</li>
+<li>Barang berbahaya, senjata, narkoba, alkohol, drone, DSLR, tongsis, vape, rokok, hewan peliharaan dan barang terlarang lainnya tidak diperbolehkan.</li>
+<li>Dilarang membuat kerusuhan atau mengganggu kenyamanan pengunjung lain.</li>
+<li>Pembelian tiket berarti menyetujui seluruh syarat dan ketentuan yang berlaku.</li>
+<li>Tiket yang sah adalah yang dibeli melalui channel resmi yang ditunjuk penyelenggara.</li>
+<li>Satu tiket berlaku untuk satu orang dan satu kali masuk area venue.</li>
+<li>Usia minimal 12 tahun.</li>
+<li>Ibu hamil tidak disarankan memasuki area venue.</li>
+<li>Wajib membawa kartu identitas asli dan e-voucher saat masuk.</li>
+</ol>
+</div>
+
+<div class="bottom">
+<div style="display:flex;justify-content:space-between;margin-bottom:12px">
+<span>Harga mulai dari</span><strong>Rp175.000</strong>
+</div>
+<a class="btn" href="#">Beli Tiket</a>
+</div>
+
+
+<style>
+.btn{transition:all .25s ease}
+.btn:hover{transform:translateY(-2px)}
+.btn:active{transform:scale(.98)}
+</style>
+<script>
+document.addEventListener('DOMContentLoaded',function(){
+ const btn=document.querySelector('.btn');
+ if(btn){
+   btn.addEventListener('click',function(e){
+     e.preventDefault();
+     localStorage.setItem('nama_tiket','EARLY BIRD - Early Entry');
+     localStorage.setItem('jenis_tiket','Festival Musik');
+     localStorage.setItem('total_pembayaran','175000');
+     this.style.transform='scale(.98)';
+     setTimeout(()=>{window.location.href='tiket.html';},250);
+   });
+ }
+});
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+ const tabs=document.querySelectorAll('.tabs div');
+ tabs.forEach((t,i)=>{
+   t.addEventListener('click',()=>{
+      tabs.forEach(x=>x.classList.remove('active'));
+      t.classList.add('active');
+      window.scrollTo({top:(i===0?document.body.scrollHeight*0.35:(i===1?document.body.scrollHeight*0.55:document.body.scrollHeight*0.75)),behavior:'smooth'});
+   });
+ });
+});
+</script>
+
+</body>
+</html>
