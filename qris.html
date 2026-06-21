@@ -3,156 +3,588 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Final QRIS Payment</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<title>QRIS Payment - RUANGRAYA-KARAWANG</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif}
-body{background:linear-gradient(135deg,#081225,#101b35);color:#fff;padding:20px}
-.wrap{max-width:800px;margin:auto}
-.card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(16px);border-radius:28px;padding:24px;margin-top:20px}
-.timer{font-size:44px;font-weight:800;text-align:center;color:#00e5ff}
-.timer.warning{color:#ff3b3b;animation:pulse .8s infinite}
-@keyframes pulse{50%{transform:scale(1.08)}}
-.alert{display:none;text-align:center;color:#ff6b6b;font-weight:700;margin-top:8px}
-.alert.show{display:block;animation:pulse .8s infinite}
-.info{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:20px 0}
-.item{background:rgba(255,255,255,.05);padding:14px;border-radius:16px}
-.label{font-size:12px;color:#b8c4d8}
-.value{font-weight:700;margin-top:6px}
-.qrbox{text-align:center;padding:18px;border-radius:24px;background:#fff}
-.qrbox img{max-width:100%;border-radius:16px}
-.total{font-size:34px;font-weight:800;color:#00e5ff;text-align:center;margin:15px 0}
-.copybtn,.btn{width:100%;padding:16px;border:none;border-radius:16px;font-weight:700;cursor:pointer}
-.copybtn{background:#243b63;color:#fff;margin-bottom:15px}
-.uploadbox{border:2px dashed rgba(255,255,255,.3);padding:30px;border-radius:22px;text-align:center;background:rgba(255,255,255,.04)}
-.uploadbox input{display:none}
-.uploadbox label{cursor:pointer;display:block}
-.preview{max-width:100%;display:none;border-radius:16px;margin-top:15px}
-.btn{background:linear-gradient(135deg,#00c8ff,#0099ff);color:#fff;margin-top:15px}
-#overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);justify-content:center;align-items:center;flex-direction:column;z-index:9999}
-.spin{width:80px;height:80px;border-radius:50%;border:6px solid rgba(255,255,255,.15);border-top:6px solid #00e5ff;animation:rot 1s linear infinite}
-@keyframes rot{100%{transform:rotate(360deg)}}
-#status{margin-top:20px}
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:linear-gradient(135deg,#081225,#101b35,#1c0f37);
+color:#fff;
+padding:20px;
+min-height:100vh;
+}
+
+.wrap{
+max-width:850px;
+margin:auto;
+}
+
+.card{
+margin-top:20px;
+padding:28px;
+border-radius:30px;
+background:rgba(255,255,255,.06);
+border:1px solid rgba(255,255,255,.10);
+backdrop-filter:blur(20px);
+box-shadow:0 0 40px rgba(0,0,0,.25);
+}
+
+.header{
+text-align:center;
+margin-bottom:30px;
+}
+
+.logo{
+font-size:32px;
+font-weight:800;
+}
+
+.sub{
+margin-top:8px;
+font-size:14px;
+color:#b7c8e8;
+}
+
+.timer{
+font-size:52px;
+font-weight:800;
+text-align:center;
+color:#00d9ff;
+letter-spacing:3px;
+}
+
+.timer.warning{
+color:#ff3d3d;
+animation:pulse .8s infinite;
+}
+
+@keyframes pulse{
+50%{
+transform:scale(1.05);
+}
+}
+
+.alert{
+display:none;
+margin-top:10px;
+text-align:center;
+font-weight:700;
+color:#ff6b6b;
+}
+
+.alert.show{
+display:block;
+}
+
+.info{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:15px;
+margin-top:25px;
+}
+
+.item{
+background:rgba(255,255,255,.05);
+padding:16px;
+border-radius:18px;
+border:1px solid rgba(255,255,255,.08);
+}
+
+.label{
+font-size:12px;
+color:#b8c4d8;
+}
+
+.value{
+margin-top:8px;
+font-size:16px;
+font-weight:700;
+}
+
+.qrbox{
+margin-top:25px;
+background:white;
+padding:20px;
+border-radius:28px;
+text-align:center;
+}
+
+.qrbox img{
+width:100%;
+max-width:400px;
+border-radius:18px;
+}
+
+.total{
+margin-top:25px;
+font-size:38px;
+font-weight:800;
+color:#00e5ff;
+text-align:center;
+}
+
+.copybtn,
+.btn{
+width:100%;
+padding:18px;
+border:none;
+border-radius:18px;
+font-size:16px;
+font-weight:700;
+cursor:pointer;
+transition:.3s;
+}
+
+.copybtn{
+background:#22375c;
+color:white;
+margin-top:20px;
+}
+
+.btn{
+margin-top:18px;
+background:linear-gradient(135deg,#00c8ff,#008cff);
+color:white;
+}
+
+.copybtn:hover,
+.btn:hover{
+transform:translateY(-3px);
+}
+
+.uploadbox{
+margin-top:25px;
+border:2px dashed rgba(255,255,255,.25);
+padding:30px;
+border-radius:25px;
+background:rgba(255,255,255,.04);
+text-align:center;
+}
+
+.uploadbox input{
+display:none;
+}
+
+.uploadbox label{
+cursor:pointer;
+display:block;
+line-height:30px;
+}
+
+.preview{
+display:none;
+width:100%;
+max-width:320px;
+margin:auto;
+margin-top:20px;
+border-radius:18px;
+}
+
+.check{
+margin-top:20px;
+display:flex;
+gap:10px;
+align-items:center;
+}
+
+#overlay{
+display:none;
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.92);
+backdrop-filter:blur(20px);
+justify-content:center;
+align-items:center;
+flex-direction:column;
+z-index:99999;
+}
+
+.spin{
+width:95px;
+height:95px;
+border-radius:50%;
+border:8px solid rgba(255,255,255,.15);
+border-top:8px solid #00e5ff;
+animation:putar 1s linear infinite;
+}
+
+@keyframes putar{
+100%{
+transform:rotate(360deg);
+}
+}
+
+.loading-title{
+margin-top:30px;
+font-size:28px;
+font-weight:700;
+}
+
+#status{
+margin-top:18px;
+font-size:18px;
+line-height:34px;
+text-align:center;
+color:#d7d7d7;
+}
+
+.progress{
+width:320px;
+height:10px;
+margin-top:25px;
+background:rgba(255,255,255,.12);
+border-radius:100px;
+overflow:hidden;
+}
+
+.bar{
+width:0;
+height:100%;
+background:linear-gradient(90deg,#00e5ff,#00a3ff);
+}
+
+@media(max-width:768px){
+.info{
+grid-template-columns:1fr;
+}
+
+.timer{
+font-size:42px;
+}
+
+.logo{
+font-size:26px;
+}
+}
 </style>
 </head>
 <body>
+
 <div class="wrap">
 <div class="card">
+
+<div class="header">
+<div class="logo">BIGU FESTIVAL 2026</div>
+<div class="sub">QRIS Payment Gateway</div>
+</div>
+
 <div class="timer" id="payTimer">02:00</div>
-<div class="alert" id="warn">⚠ SEGERA SELESAIKAN PEMBAYARAN</div>
+
+<div class="alert" id="warn">
+⚠ SEGERA SELESAIKAN PEMBAYARAN
+</div>
 
 <div class="info">
-<div class="item"><div class="label">Nama Pemesan</div><div class="value" id="nama">-</div></div>
-<div class="item"><div class="label">Jumlah Tiket</div><div class="value" id="jumlah">0</div></div>
-<div class="item"><div class="label">Jenis Tiket</div><div class="value" id="jenis">-</div></div>
-<div class="item"><div class="label">Total Pembayaran</div><div class="value" id="totalInfo">Rp0</div></div>
+
+<div class="item">
+<div class="label">Nama Pemesan</div>
+<div class="value" id="nama">-</div>
+</div>
+
+<div class="item">
+<div class="label">Jumlah Tiket</div>
+<div class="value" id="jumlah">0</div>
+</div>
+
+<div class="item">
+<div class="label">Jenis Tiket</div>
+<div class="value" id="jenis">-</div>
+</div>
+
+<div class="item">
+<div class="label">Total Pembayaran</div>
+<div class="value" id="totalInfo">Rp0</div>
+</div>
+
 </div>
 
 <div class="qrbox">
-<img src="qris.png" alt="QRIS">
+<img src="qris-pembayaran1.jpg" alt="QRIS">
 </div>
 
 <div class="total" id="total">Rp0</div>
-<button class="copybtn" onclick="copyNominal()">📋 Salin Nominal Pembayaran</button>
+
+<button class="copybtn" onclick="copyNominal()">
+📋 Salin Nominal Pembayaran
+</button>
 
 <div class="uploadbox">
-<label for="bukti">📤 Upload Bukti Pembayaran<br><small>Klik untuk memilih gambar</small></label>
-<input type="file" id="bukti" accept="image/*">
+<label for="bukti">
+📤 Upload Bukti Pembayaran
+<br>
+<small>Klik untuk memilih gambar</small>
+</label>
+
+<input
+type="file"
+id="bukti"
+accept="image/*">
+
 <img id="preview" class="preview">
 </div>
 
-<div style="margin-top:15px">
-<label><input type="checkbox" id="agree"> Saya telah melakukan pembayaran</label>
+<div class="check">
+<input type="checkbox" id="agree">
+<label for="agree">
+Saya telah melakukan pembayaran
+</label>
 </div>
 
-<button class="btn" onclick="verifikasi()">KONFIRMASI PEMBAYARAN</button>
+<button class="btn" onclick="verifikasi()">
+KONFIRMASI PEMBAYARAN
+</button>
+
 </div>
 </div>
 
 <div id="overlay">
+
 <div class="spin"></div>
-<div id="status">Pembayaran Sedang Diproses...</div>
+
+<div class="loading-title">
+Memverifikasi Pembayaran
+</div>
+
+<div id="status">
+Mohon tunggu...
+</div>
+
+<div class="progress">
+<div class="bar" id="bar"></div>
+</div>
+
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
 <script>
-emailjs.init("qwh-PQ-0-G6lBjI4C");
 
-const nama=localStorage.getItem('nama')||'-';
-const jenis=localStorage.getItem('jenisTiket')||localStorage.getItem('ticket_name')||'-';
-const jumlah=localStorage.getItem('jumlahTiket')||localStorage.getItem('ticket_qty')||'0';
-const total=localStorage.getItem('totalPembayaran')||((localStorage.getItem('ticket_qty')||0)*(localStorage.getItem('ticket_price')||0));
+/* GANTI DENGAN PUBLIC KEY EMAILJS */
+emailjs.init("rO0DfaUWbm1nU1PZo");
 
-document.getElementById('nama').innerText=nama;
-document.getElementById('jenis').innerText=jenis;
-document.getElementById('jumlah').innerText=jumlah;
-document.getElementById('total').innerText='Rp'+Number(total).toLocaleString('id-ID');
-document.getElementById('totalInfo').innerText='Rp'+Number(total).toLocaleString('id-ID');
+/* AMBIL DATA LOCALSTORAGE */
 
-let t=120;
-const timer=document.getElementById('payTimer');
+const nama = localStorage.getItem('nama') || '-';
+const jenis = localStorage.getItem('jenisTiket') || '-';
+const jumlah = localStorage.getItem('jumlahTiket') || '0';
+const total = localStorage.getItem('totalPembayaran') || '0';
+
+document.getElementById('nama').textContent = nama;
+document.getElementById('jenis').textContent = jenis;
+document.getElementById('jumlah').textContent = jumlah;
+
+document.getElementById('total').textContent =
+'Rp' + Number(total).toLocaleString('id-ID');
+
+document.getElementById('totalInfo').textContent =
+'Rp' + Number(total).toLocaleString('id-ID');
+
+/* DEBUG LOCAL STORAGE */
+
+console.log("nama =", localStorage.getItem('nama'));
+console.log("jenisTiket =", localStorage.getItem('jenisTiket'));
+console.log("jumlahTiket =", localStorage.getItem('jumlahTiket'));
+console.log("totalPembayaran =", localStorage.getItem('totalPembayaran'));
+
+/* TIMER */
+
+let t = 120;
+
+const timer =
+document.getElementById('payTimer');
+
 setInterval(()=>{
- if(t>0){
-  t--;
-  let m=Math.floor(t/60),s=t%60;
-  timer.innerText=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
-  if(t<=10){
-    timer.classList.add('warning');
-    document.getElementById('warn').classList.add('show');
-  }
- }
+
+if(t>0){
+
+t--;
+
+let m=Math.floor(t/60);
+let s=t%60;
+
+timer.textContent =
+String(m).padStart(2,'0')
++
+':'
++
+String(s).padStart(2,'0');
+
+if(t<=10){
+
+timer.classList.add('warning');
+
+document
+.getElementById('warn')
+.classList
+.add('show');
+
+}
+
+}
+
 },1000);
 
-document.getElementById('bukti').onchange=e=>{
- const f=e.target.files[0];
- if(!f)return;
- const preview=document.getElementById('preview');
- preview.src=URL.createObjectURL(f);
- preview.style.display='block';
-}
+/* PREVIEW BUKTI */
+
+document.getElementById('bukti').addEventListener('change',(e)=>{
+
+const file=e.target.files[0];
+
+if(!file) return;
+
+const preview =
+document.getElementById('preview');
+
+preview.src =
+URL.createObjectURL(file);
+
+preview.style.display='block';
+
+});
+
+/* COPY NOMINAL */
 
 function copyNominal(){
- navigator.clipboard.writeText(total);
- alert('Nominal berhasil disalin');
+
+navigator.clipboard.writeText(total);
+
+alert('Nominal berhasil disalin');
+
 }
+
+/* VERIFIKASI */
 
 function verifikasi(){
- const agree=document.getElementById('agree');
- const bukti=document.getElementById('bukti');
- const overlay=document.getElementById('overlay');
 
- if(!agree.checked){alert('Centang konfirmasi pembayaran');return;}
- if(!bukti.files.length){alert('Upload bukti pembayaran');return;}
+const agree =
+document.getElementById('agree');
 
- overlay.style.display='flex';
+const bukti =
+document.getElementById('bukti');
 
- const dataEmail={
-  nama:nama,
-  email:localStorage.getItem('email')||'',
-  wa:localStorage.getItem('wa')||'',
-  identitas:localStorage.getItem('identitas')||'',
-  nomorIdentitas:localStorage.getItem('nomorIdentitas')||'',
-  alamat:localStorage.getItem('alamat')||'',
-  jenis_tiket:jenis,
-  jumlah_tiket:jumlah,
-  totalPembayaran:total,
-  metode_pembayaran:'QRIS',
-  tanggal_transaksi:new Date().toLocaleString('id-ID')
- };
+if(!agree.checked){
 
- emailjs.send('service_mp5tixd','template_sifrpxs',dataEmail)
- .then(()=>{
-   setTimeout(()=>{
-      window.location.href='pending.html';
-   },5000);
- })
- .catch((err)=>{
-   console.log(err);
-   setTimeout(()=>{
-      window.location.href='pending.html';
-   },1500);
- });
+alert('Centang konfirmasi pembayaran terlebih dahulu');
+
+return;
+
 }
+
+if(!bukti.files.length){
+
+alert('Silakan upload bukti pembayaran');
+
+return;
+
+}
+
+const overlay =
+document.getElementById('overlay');
+
+const status =
+document.getElementById('status');
+
+const bar =
+document.getElementById('bar');
+
+overlay.style.display='flex';
+
+const dataEmail={
+
+nama:nama,
+email:localStorage.getItem('email')||'',
+wa:localStorage.getItem('wa')||'',
+identitas:localStorage.getItem('identitas')||'',
+nomorIdentitas:localStorage.getItem('nomorIdentitas')||'',
+alamat:localStorage.getItem('alamat')||'',
+jenis_tiket:jenis,
+jumlah_tiket:jumlah,
+totalPembayaran:total,
+metode_pembayaran:'QRIS',
+tanggal_transaksi:new Date().toLocaleString('id-ID')
+
+};
+
+emailjs.send(
+'service_hpifg78',
+'template_w1oy5dc',
+dataEmail
+)
+.then(()=>{
+console.log('Email berhasil dikirim');
+})
+.catch(err=>{
+console.log(err);
+});
+
+let sisa=120;
+
+const pesan=[
+
+"Memvalidasi pembayaran...",
+"Memproses transaksi...",
+"Mengirim data tiket...",
+"Menyelesaikan verifikasi..."
+
+];
+
+let idx=0;
+
+status.innerHTML =
+pesan[0] +
+"<br><br>02:00";
+
+const proses=setInterval(()=>{
+
+sisa--;
+
+let menit=Math.floor(sisa/60);
+let detik=sisa%60;
+
+status.innerHTML =
+pesan[idx] +
+"<br><br>" +
+String(menit).padStart(2,'0') +
+":" +
+String(detik).padStart(2,'0');
+
+bar.style.width =
+((120-sisa)/120*100) + "%";
+
+if(sisa===90) idx=1;
+if(sisa===60) idx=2;
+if(sisa===30) idx=3;
+
+if(sisa<=0){
+
+clearInterval(proses);
+
+status.innerHTML =
+"✓ Pembayaran Berhasil Diverifikasi<br><br>Mengalihkan halaman...";
+
+bar.style.width="100%";
+
+setTimeout(()=>{
+
+window.location.href="pending.html";
+
+},2000);
+
+}
+
+},1000);
+
+}
+
 </script>
+
 </body>
 </html>
