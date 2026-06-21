@@ -81,9 +81,9 @@ input,select,textarea{width:100%;padding:16px;margin-top:8px;border-radius:16px;
 <div id="loading">Sedang memproses...</div>
 
 <script>
-const total = localStorage.getItem('totalPembayaran') || 0;
-const jumlahTiket = localStorage.getItem('jumlahTiket') || 0;
-const jenisTiket = localStorage.getItem('jenisTiket') || '-';
+const total = localStorage.getItem('totalPembayaran') || (localStorage.getItem('ticket_qty')||0)* (localStorage.getItem('ticket_price')||0);
+const jumlahTiket = localStorage.getItem('jumlahTiket') || localStorage.getItem('ticket_qty') || 0;
+const jenisTiket = localStorage.getItem('jenisTiket') || localStorage.getItem('ticket_name') || '-';
 
 document.getElementById('totalBayar').innerText =
 'Rp' + Number(total).toLocaleString('id-ID');
